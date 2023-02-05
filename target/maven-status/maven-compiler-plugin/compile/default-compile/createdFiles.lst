@@ -1,0 +1,3 @@
+com/jesuspinar/login_register_spring/controller/LoginController.class
+com/jesuspinar/login_register_spring/model/UserModel.class
+com/jesuspinar/login_register_spring/repository/IUserRepository.class

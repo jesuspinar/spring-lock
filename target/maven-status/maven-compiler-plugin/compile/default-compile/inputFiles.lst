@@ -1,0 +1,7 @@
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/controller/LoginController.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/repository/IUserRepository.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/model/UserModel.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/LoginRegisterSpringApp.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/service/UserService.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/security/SecurityConfig.java
+/Users/jesus/IdeaProjects/login_register_spring/src/main/java/com/jesuspinar/login_register_spring/security/UserDetailsServiceImpl.java
