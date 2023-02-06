@@ -1,9 +1,9 @@
 package com.jesuspinar.login_register_spring.model;
 
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 

@@ -6,7 +6,7 @@
 </head>
 <body>
     <main>
-        <form id="registerform" th:action="@{/auth/register}" th:object="${user}" method="POST" role="form" >
+        <form id="registerform" th:action="@{/process_register}" th:object="${user}" method="POST" role="form" >
             <h1>Register</h1>
             <input type="text" th:field="*{email}" placeholder="Username">
             <br>

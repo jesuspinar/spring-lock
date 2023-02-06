@@ -1,53 +1,55 @@
 package com.jesuspinar.login_register_spring.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jesuspinar.login_register_spring.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    UserDetailsService userDetailsService;
+public class SecurityConfig {
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public UserDetailsServiceImpl userDetailsService(){
+        return new UserDetailsServiceImpl();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/", "/webjars/**", "/css/**","/img/**", "/h2-console/**", "/public/**", "/auth/**", "/files/**")
-                .permitAll()
-                .anyRequest().authenticated()
+                .authorizeHttpRequests()
+                .requestMatchers("/user").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/auth/login")
-                .defaultSuccessUrl("/public/index", true)
-                .loginProcessingUrl("/auth/login-post")
+                .usernameParameter("email")
+                .loginPage("/login")
+                .defaultSuccessUrl("/changeme") //TODO:
                 .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/public/index");
+                .logout().logoutSuccessUrl("/").permitAll();
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-
+        return http.build();
     }
 }
