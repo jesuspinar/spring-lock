@@ -16,7 +16,7 @@ public class RegisterController {
     private IUserRepository iUserRepository;
 
     @GetMapping({"/register"})
-    public String goToregister(Model model){
+    public String goToRegister(Model model){
         model.addAttribute("user", new UserModel());
         return "register";
     }
