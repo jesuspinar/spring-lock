@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .formLogin()
                 .usernameParameter("email")
                 .loginPage("/login")
-                .defaultSuccessUrl("/changeme") //TODO:
+                .defaultSuccessUrl("/welcome") //TODO:
                 .permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();

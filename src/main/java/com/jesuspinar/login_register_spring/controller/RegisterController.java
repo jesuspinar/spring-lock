@@ -20,7 +20,7 @@ public class RegisterController {
         model.addAttribute("user", new UserModel());
         return "register";
     }
-    @PostMapping("/process_register")
+    @PostMapping("/register")
     public String processRegister(UserModel user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
