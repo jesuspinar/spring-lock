@@ -2,7 +2,9 @@ package com.jesuspinar.login_register_spring.controller;
 
 import com.jesuspinar.login_register_spring.model.UserModel;
 import com.jesuspinar.login_register_spring.repository.IUserRepository;
+import com.jesuspinar.login_register_spring.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
     @Autowired
-    private IUserRepository iUserRepository;
+    private UserDetailsServiceImpl userDetailsService;
 
     @GetMapping({"/register"})
     public String goToRegister(Model model){
@@ -22,10 +24,11 @@ public class RegisterController {
     }
     @PostMapping("/register")
     public String processRegister(UserModel user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        iUserRepository.save(user);
+        //TODO: handle errors
+        boolean isRegistered = userDetailsService.register(user);
+        if (isRegistered){
+            return "login";
+        }
         return "index";
     }
   
