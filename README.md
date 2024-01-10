@@ -1,6 +1,6 @@
 # Setup 
 ## Create a mysql docker container 
-´´´
+```
 docker run -p 3306:3306 --name mysql-server -e MYSQL_ROOT_PASSWORD=thesecurespassword -v $HOME/mysql-data:/var/lib/mysql -d mysql:latest
 ```
 
