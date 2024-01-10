@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .formLogin()
                 .usernameParameter("email")
                 .loginPage("/login")
-                .defaultSuccessUrl("/welcome")
+                //.defaultSuccessUrl("dashboard/welcome")
                 .permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
